@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 async function run(cwd, context) {
   var _a;
-  console.log("publish-node-package-action", "1.11.0");
+  console.log("publish-node-package-action", "1.12.0");
   const owner = (_a = context.payload.repository) == null ? void 0 : _a.owner.login;
   if (!owner) {
     throw new Error("No owner found in context");
