@@ -1,6 +1,6 @@
 {
     "name": "publish-node-package-action",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "description": "Publish a NodeJS package to NPM or GitHub Packages",
     "scripts": {
         "prepare": "husky install",
