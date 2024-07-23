@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 async function rewritePkgJSON(cwd, context) {
   var _a;
-  console.log("publish-node-package-action", "1.7.0");
+  console.log("publish-node-package-action", "1.8.0");
   const owner = (_a = context.payload.repository) == null ? void 0 : _a.owner.login;
   if (!owner) {
     throw new Error("No owner found in context");
