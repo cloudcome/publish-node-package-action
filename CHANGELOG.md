@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.9.1...v1.10.0) (2024-07-23)
+
+
+### Features
+
+* rename rewritePkgJSON to main and update action.yml script ([a41596c](https://github.com/FrontEndDev-org/publish-node-package-action/commit/a41596ca9bf4b0ba2721fc78a35a523b39c82d0a))
+
 ## [1.9.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.9.0...v1.9.1) (2024-07-23)
 
 
