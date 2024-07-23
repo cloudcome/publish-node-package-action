@@ -1,0 +1,29 @@
+# 代码格式检查
+
+name: code review
+
+on:
+    push:
+        branches:
+            - v*.x
+    pull_request:
+    schedule:
+        # 19:00(UTC) 每天，相当于 03:00(GMT+8)
+        - cron: '0 19 * * *'
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup-nvm
+            - run: npm ci
+            - run: npm run lint
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup-nvm
+            - run: npm ci
+            - run: npm run test

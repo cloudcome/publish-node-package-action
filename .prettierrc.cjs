@@ -1,8 +1,10 @@
 /**
+ * prettier.config
+ * @ref https://prettier.io/
  * @type {import('prettier').Config}
  */
 module.exports = {
-  tabWidth: 2,
-  singleQuote: true,
-  printWith: 120,
+    tabWidth: 4,
+    singleQuote: true,
+    printWidth: 160,
 };

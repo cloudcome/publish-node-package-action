@@ -21,7 +21,7 @@ pnpm-debug.log*
 !.vscode/extensions.json
 
 # dist and cache
-/dist
+# /dist
 /dist-*
 /dist_*
 .cache

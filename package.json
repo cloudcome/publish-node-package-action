@@ -1,21 +1,45 @@
 {
-  "name": "publish-node-package-action",
-  "version": "1.7.0",
-  "description": "Publish a NodeJS package to NPM or GitHub Packages",
-  "scripts": {
-    "prepare": "husky install"
-  },
-  "author": "云淡然 <hi@ydr.me> (https://ydr.me)",
-  "homepage": "https://github.com/FrontEndDev-org/publish-node-package-action",
-  "repository": "https://github.com/FrontEndDev-org/publish-node-package-action",
-  "license": "MIT",
-  "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
-    "@commitlint/types": "^17.4.4",
-    "@types/prettier": "^2.7.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier": "^2.8.8"
-  }
+    "name": "publish-node-package-action",
+    "version": "1.7.0",
+    "description": "Publish a NodeJS package to NPM or GitHub Packages",
+    "scripts": {
+        "prepare": "husky install",
+        "lint": "eslint src/**/*.ts && tsc --project tsconfig.json --noEmit",
+        "test": "echo '未实现'",
+        "build": "NODE_ENV=production vite build"
+    },
+    "author": "云淡然 <hi@ydr.me> (https://ydr.me)",
+    "homepage": "https://github.com/FrontEndDev-org/publish-node-package-action",
+    "repository": "https://github.com/FrontEndDev-org/publish-node-package-action",
+    "license": "MIT",
+    "devDependencies": {
+        "@commitlint/cli": "^17.6.3",
+        "@commitlint/config-conventional": "^17.6.3",
+        "@commitlint/types": "^17.4.4",
+        "@types/node": "20",
+        "@types/npmcli__map-workspaces": "^3.0.4",
+        "@types/prettier": "^3.0.0",
+        "@typescript-eslint/eslint-plugin": "^7.17.0",
+        "@typescript-eslint/parser": "^7.17.0",
+        "@vitest/coverage-v8": "^2.0.4",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-define-config": "^2.1.0",
+        "eslint-import-resolver-typescript": "^3.6.1",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-prettier": "^5.2.1",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.2",
+        "prettier": "^3.3.3",
+        "react-router-dom": "^6.25.1",
+        "typescript": "^5.5.4",
+        "vite": "^5.3.4",
+        "vite-plugin-dts": "^3.9.1",
+        "vite-plugin-externalize-deps": "^0.8.0",
+        "vitest": "^2.0.4"
+    },
+    "dependencies": {
+        "@actions/github": "^6.0.0",
+        "@npmcli/map-workspaces": "^3.0.6"
+    }
 }
