@@ -68,6 +68,8 @@ jobs:
 | `target` | true     | None     | Packages target, optionally `npm`/`github`                                                                             |
 | `token`  | false    | None     | Target authorization token, GitHub Packages target does not need, internally has automatically obtained `github.token` |
 | `tag`    | false    | `latest` | The version label to release, the default is latest                                                                    |
+| `workspaces`    | false    | None | Publish all packages in all workspaces                          |
+| `options`    | false    | None | Additional options for `npm publish` command                     |
 
 # Outputs
 
