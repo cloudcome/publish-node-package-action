@@ -7370,7 +7370,7 @@ var lib = mapWorkspaces;
 const mapWorkspaces$1 = /* @__PURE__ */ getDefaultExportFromCjs(lib);
 async function run(cwd, context) {
   var _a2;
-  console.log("publish-node-package-action", "1.12.0");
+  console.log("publish-node-package-action", "1.13.0");
   const owner = (_a2 = context.payload.repository) == null ? void 0 : _a2.owner.login;
   if (!owner) {
     throw new Error("No owner found in context");
