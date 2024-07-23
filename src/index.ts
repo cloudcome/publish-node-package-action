@@ -3,7 +3,7 @@ import mapWorkspaces from '@npmcli/map-workspaces';
 import fs from 'fs';
 import path from 'path';
 
-export async function main(cwd: string, context: Context) {
+export default async function main(cwd: string, context: Context) {
     console.log(process.env.PKG_NAME, process.env.PKG_VERSION);
 
     // @ref https://github.com/actions/toolkit/blob/457303960f03375db6f033e214b9f90d79c3fe5c/packages/github/src/context.ts
