@@ -38,6 +38,6 @@
     },
     "dependencies": {
         "@actions/github": "^6.0.0",
-        "@npmcli/map-workspaces": "^3.0.6"
+        "fast-glob": "^3.3.2"
     }
 }
