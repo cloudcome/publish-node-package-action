@@ -1,6 +1,6 @@
-import { externalizeDeps } from 'vite-plugin-externalize-deps';
 import { defineConfig } from 'vitest/config';
 import pkg from './package.json';
+import { builtinModules } from 'module';
 
 /**
  * vite config
@@ -9,10 +9,6 @@ import pkg from './package.json';
  * @ref https://vitest.dev/
  */
 export default defineConfig({
-    plugins: [
-        // plugins
-        externalizeDeps(),
-    ],
     define: {
         'process.env.PKG_NAME': JSON.stringify(pkg.name),
         'process.env.PKG_VERSION': JSON.stringify(pkg.version),
@@ -28,6 +24,7 @@ export default defineConfig({
             },
         },
         rollupOptions: {
+            external: [...builtinModules, 'node:*'],
             output: [
                 {
                     format: 'cjs',
