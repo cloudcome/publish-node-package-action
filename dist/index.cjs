@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 async function rewritePkgJSON(cwd, context) {
   var _a;
+  console.log("publish-node-package-action", "1.7.0");
   const owner = (_a = context.payload.repository) == null ? void 0 : _a.owner.login;
   if (!owner) {
     throw new Error("No owner found in context");
@@ -17,6 +18,7 @@ async function rewritePkgJSON(cwd, context) {
     pkg2.name = "@" + owner + "/" + underlineName;
     fs.writeFileSync(file, JSON.stringify(pkg2), "utf-8");
   });
+  return "";
 }
 module.exports = rewritePkgJSON;
 //# sourceMappingURL=index.cjs.map
