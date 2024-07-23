@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.11.0...v1.12.0) (2024-07-23)
+
+
+### Features
+
+* **action:** replace inline script with external module ([9aa42b1](https://github.com/FrontEndDev-org/publish-node-package-action/commit/9aa42b147ad3f2946baa7eb6d7b32df3946d8dc5))
+
 ## [1.11.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.10.1...v1.11.0) (2024-07-23)
 
 
