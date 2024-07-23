@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.8.0...v1.9.0) (2024-07-23)
+
+
+### Features
+
+* log github context and core tools in modify-package-json action ([c237172](https://github.com/FrontEndDev-org/publish-node-package-action/commit/c237172f14f2233da18c1b13da494630056619e8))
+
 ## [1.8.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.7.0...v1.8.0) (2024-07-23)
 
 
