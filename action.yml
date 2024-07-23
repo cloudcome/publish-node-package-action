@@ -13,6 +13,12 @@ inputs:
     description: The version tag to release, the default is latest
     required: false
     default: latest
+  workspaces:
+    description: Publish all packages in all workspaces
+    required: false
+  options:
+    description: Additional options for `npm publish` command
+    required: false
 
 # https://actions-cool.github.io/github-action-branding/
 branding:
@@ -59,7 +65,7 @@ runs:
 
     - name: Publish
       shell: bash
-      run: npm publish --tag ${{ inputs.tag }}
+      run: npm publish --tag ${{ inputs.tag }} ${{ inputs.workspaces && '-ws' || '' }} ${{ inputs.options }}
 
     - name: Restore the original .npmrc file
       if: always()
