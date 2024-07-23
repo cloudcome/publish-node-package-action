@@ -1,9 +1,8 @@
 "use strict";
-Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const mapWorkspaces = require("@npmcli/map-workspaces");
 const fs = require("fs");
 const path = require("path");
-async function main(cwd, context) {
+async function run(cwd, context) {
   var _a;
   console.log("publish-node-package-action", "1.11.0");
   const owner = (_a = context.payload.repository) == null ? void 0 : _a.owner.login;
@@ -21,4 +20,4 @@ async function main(cwd, context) {
   });
   return "";
 }
-exports.main = main;
+module.exports = run;
