@@ -53,12 +53,16 @@ runs:
       with:
         result-encoding: string
         script: |
+          console.log('process.cwd()', process.cwd());
+          console.log('__dirname', __dirname);
           console.log('github', github);
           console.log('context', context);
           console.log('core', core);
           console.log('exec', exec);
           console.log('glob', glob);
           console.log('io', io);
+          console.log(require.resolve('./dist/index.cjs'));
+          console.log(__original_require__.resolve('./dist/index.cjs'));
           const script = __original_require__('./dist/index.cjs');
           return await script(__dirname, context);
 
