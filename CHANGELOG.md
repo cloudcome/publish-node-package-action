@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.9.0...v1.9.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* log resolve paths for index.cjs in action.yml ([e273998](https://github.com/FrontEndDev-org/publish-node-package-action/commit/e273998eeabbff0c1175e6910b42bab61a8292aa))
+
 ## [1.9.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.8.0...v1.9.0) (2024-07-23)
 
 
