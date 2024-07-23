@@ -1,8 +1,9 @@
 "use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const mapWorkspaces = require("@npmcli/map-workspaces");
 const fs = require("fs");
 const path = require("path");
-async function rewritePkgJSON(cwd, context) {
+async function main(cwd, context) {
   var _a;
   console.log("publish-node-package-action", "1.9.0");
   const owner = (_a = context.payload.repository) == null ? void 0 : _a.owner.login;
@@ -20,5 +21,4 @@ async function rewritePkgJSON(cwd, context) {
   });
   return "";
 }
-module.exports = rewritePkgJSON;
-//# sourceMappingURL=index.cjs.map
+exports.main = main;

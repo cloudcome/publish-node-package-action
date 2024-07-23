@@ -1,5 +1,4 @@
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
-import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vitest/config';
 import pkg from './package.json';
 
@@ -11,10 +10,8 @@ import pkg from './package.json';
  */
 export default defineConfig({
     plugins: [
+        // plugins
         externalizeDeps(),
-        dts({
-            include: 'src',
-        }),
     ],
     define: {
         'process.env.PKG_NAME': JSON.stringify(pkg.name),
@@ -22,7 +19,7 @@ export default defineConfig({
     },
     build: {
         minify: false,
-        sourcemap: true,
+        sourcemap: false,
         copyPublicDir: false,
         reportCompressedSize: false,
         lib: {
@@ -32,11 +29,6 @@ export default defineConfig({
         },
         rollupOptions: {
             output: [
-                {
-                    format: 'esm',
-                    entryFileNames: '[name].mjs',
-                    chunkFileNames: '[name].mjs',
-                },
                 {
                     format: 'cjs',
                     entryFileNames: '[name].cjs',
