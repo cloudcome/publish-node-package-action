@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.10.0...v1.10.1) (2024-07-23)
+
+
+### Bug Fixes
+
+* **action.yml:** add exports object definition to avoid script errors ([2af8d11](https://github.com/FrontEndDev-org/publish-node-package-action/commit/2af8d1119bd9a4a6aab83f3ad434592bcc2ecaa7))
+
 ## [1.10.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.9.1...v1.10.0) (2024-07-23)
 
 
