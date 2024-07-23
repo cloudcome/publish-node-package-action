@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.10.1...v1.11.0) (2024-07-23)
+
+
+### Features
+
+* **readme:** add workspaces and options params to npm publish ([ea37e6b](https://github.com/FrontEndDev-org/publish-node-package-action/commit/ea37e6b98bbdcc0c640097e1c0377b55814beb94))
+
 ## [1.10.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.10.0...v1.10.1) (2024-07-23)
 
 
