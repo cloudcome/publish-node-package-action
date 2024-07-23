@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.7.0...v1.8.0) (2024-07-23)
+
+
+### Features
+
+* 支持 Monorepo 发布 github package ([5cb5165](https://github.com/FrontEndDev-org/publish-node-package-action/commit/5cb5165c52456dff1e109925a685c98086efd7bc))
+
 ## [1.7.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.6.1...v1.7.0) (2024-07-23)
 
 
