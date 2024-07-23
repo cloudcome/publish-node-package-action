@@ -53,6 +53,7 @@ runs:
       with:
         result-encoding: string
         script: |
+          const exports = exports || {};
           // SCRIPT REPLACE START
           "use strict";
           Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
