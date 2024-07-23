@@ -6,7 +6,7 @@
         "prepare": "husky install",
         "lint": "eslint src/**/*.ts && tsc --project tsconfig.json --noEmit",
         "test": "echo '未实现'",
-        "build": "NODE_ENV=production vite build"
+        "build": "NODE_ENV=production vite build && node scripts/replace-action.cjs"
     },
     "author": "云淡然 <hi@ydr.me> (https://ydr.me)",
     "homepage": "https://github.com/FrontEndDev-org/publish-node-package-action",
