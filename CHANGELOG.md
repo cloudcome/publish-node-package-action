@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.6.1...v1.7.0) (2024-07-23)
+
+
+### Features
+
+* **publish-action:** add workspaces and options support ([98758ed](https://github.com/FrontEndDev-org/publish-node-package-action/commit/98758edf10943e13917a4487bbd0e7b17c2a4e98))
+
 ## [1.6.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.6.0...v1.6.1) (2023-05-12)
 
 
