@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.13.0...v1.14.0) (2024-07-23)
+
+
+### Features
+
+* 支持 dry-run，优化处理逻辑 ([4a53b9c](https://github.com/FrontEndDev-org/publish-node-package-action/commit/4a53b9c0a6dfee0d0ce3355b1fd1532a305e5e46))
+
 ## [1.13.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.12.0...v1.13.0) (2024-07-23)
 
 
