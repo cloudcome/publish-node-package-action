@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.12.0...v1.13.0) (2024-07-23)
+
+
+### Features
+
+* 修正构建内容 ([7dcad0d](https://github.com/FrontEndDev-org/publish-node-package-action/commit/7dcad0d56beb94f21f6338a0a8f8dd0f616b4ff9))
+
 ## [1.12.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.11.0...v1.12.0) (2024-07-23)
 
 
