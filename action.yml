@@ -53,7 +53,8 @@ runs:
       with:
         result-encoding: string
         script: |
-          const exports = exports || {};
+          const exports = {};
+          function expose() {
           // SCRIPT REPLACE START
           "use strict";
           Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
@@ -80,7 +81,9 @@ runs:
           }
           exports.main = main;
           // SCRIPT REPLACE END
-          await main(process.cwd(), context);
+          }
+          expose();
+          await exports.main(process.cwd(), context);
 
     - name: Publish
       shell: bash
