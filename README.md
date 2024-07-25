@@ -59,17 +59,19 @@ jobs:
       - uses: FrontEndDev-org/publish-node-package-action@v1
         with:
           target: github
+          token: ${{ github.token }}
 ```
 
 # Inputs
 
 | Name     | Required | Default  | Description                                                                                                            |
 | -------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `target` | true     | None     | Packages target, optionally `npm`/`github`                                                                             |
-| `token`  | false    | None     | Target authorization token, GitHub Packages target does not need, internally has automatically obtained `github.token` |
+| `target` | false     | `npm`     | Packages target, optionally `npm` OR `github`                                                                             |
+| `token`  | true    | None     | Target authorization token |
 | `tag`    | false    | `latest` | The version label to release, the default is latest                                                                    |
-| `workspaces`    | false    | None | Publish all packages in all workspaces                          |
-| `options`    | false    | None | Additional options for `npm publish` command                     |
+| `provenance`    | false    | `false` | Generate provenance statements. Publish must be run from a supported CI provider to succeed. When run from GitHub Actions, requires `id-token: write` permission.                                                               |
+| `dryRun`    | false    | `false` |  Pretend to publish, but don't actually upload to the registry.                                             |
+| `includePrivate`    | false    | `false` |  publish private packages as well.                                                                           |
 
 # Outputs
 

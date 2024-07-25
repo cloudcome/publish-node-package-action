@@ -4,20 +4,24 @@ description: Publish a NodeJS package to NPM Repository or GitHub Packages
 
 inputs:
   target:
-    description: Publish target, optionally npm/github
-    required: true
-  token:
-    description: Target authorization token, GitHub Packages target does not need, internally has automatically obtained `github.token`
+    description: Packages target, optionally npm OR github
     required: false
+    default: npm
+  token:
+    description: Target authorization token
+    required: true
   tag:
     description: The version tag to release, the default is latest
     required: false
     default: latest
-  workspaces:
-    description: Publish all packages in all workspaces
+  provenance:
+    description: "Generate provenance statements. Publish must be run from a supported CI provider to succeed. When run from GitHub Actions, requires `id-token: write` permission."
     required: false
-  options:
-    description: Additional options for `npm publish` command
+  dryRun:
+    description: Pretend to publish, but don't actually upload to the registry.
+    required: false
+  includePrivate:
+    description: publish private packages as well.
     required: false
 
 # https://actions-cool.github.io/github-action-branding/
@@ -26,44 +30,48 @@ branding:
   color: 'red'
 
 runs:
-  using: composite
-  steps:
-    - name: Make a backup of the original .npmrc file
-      shell: bash
-      run: cp .npmrc .npmrc-orgin 2> /dev/null || true
+  using: node20
+  main: dist/index.cjs
 
-    - name: Publish target is NPM Repository
-      if: inputs.target == 'npm'
-      shell: bash
-      run: |
-        echo "//registry.npmjs.org/:_authToken=${{ inputs.token }}" > .npmrc
-        echo "registry=https://registry.npmjs.org/" >> .npmrc
-        echo "provenance=true" >> .npmrc
+# runs:
+#   using: composite
+#   steps:
+#     - name: Make a backup of the original .npmrc file
+#       shell: bash
+#       run: cp .npmrc .npmrc-orgin 2> /dev/null || true
 
-    - name: Publish target is GitHub Packages
-      if: inputs.target == 'github'
-      shell: bash
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" > .npmrc
-        echo "registry=https://npm.pkg.github.com/" >> .npmrc
+#     - name: Publish target is NPM Repository
+#       if: inputs.target == 'npm'
+#       shell: bash
+#       run: |
+#         echo "//registry.npmjs.org/:_authToken=${{ inputs.token }}" > .npmrc
+#         echo "registry=https://registry.npmjs.org/" >> .npmrc
+#         echo "provenance=true" >> .npmrc
 
-    - name: Modify the package.json name to meet GitHub's naming requirements
-      if: inputs.target == 'github'
-      uses: actions/github-script@v7
-      with:
-        result-encoding: string
-        script: |
-          // https://github.com/actions/github-script/issues/322#issuecomment-1379056593
-          const run = require('${{github.action_path}}/dist/index.cjs');
-          await run(process.cwd(), context);
+#     - name: Publish target is GitHub Packages
+#       if: inputs.target == 'github'
+#       shell: bash
+#       run: |
+#         echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" > .npmrc
+#         echo "registry=https://npm.pkg.github.com/" >> .npmrc
 
-    - name: Publish
-      shell: bash
-      run: npm publish --tag ${{ inputs.tag }} ${{ inputs.workspaces && '-ws' || '' }} ${{ inputs.options }}
+#     - name: Modify the package.json name to meet GitHub's naming requirements
+#       if: inputs.target == 'github'
+#       uses: actions/github-script@v7
+#       with:
+#         result-encoding: string
+#         script: |
+#           // https://github.com/actions/github-script/issues/322#issuecomment-1379056593
+#           const run = require('${{github.action_path}}/dist/index.cjs');
+#           await run(process.cwd(), context);
 
-    - name: Restore the original .npmrc file
-      if: always()
-      shell: bash
-      run: |
-        rm -rf .npmrc
-        mv .npmrc-origin .npmrc 2> /dev/null || true
+#     - name: Publish
+#       shell: bash
+#       run: npm publish --tag ${{ inputs.tag }} ${{ inputs.workspaces && '-ws' || '' }} ${{ inputs.options }}
+
+#     - name: Restore the original .npmrc file
+#       if: always()
+#       shell: bash
+#       run: |
+#         rm -rf .npmrc
+#         mv .npmrc-origin .npmrc 2> /dev/null || true

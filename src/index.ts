@@ -1,43 +1,28 @@
-import type { Context } from '@actions/github/lib/context';
-import glob from 'fast-glob';
-import fs from 'fs';
-import path from 'path';
+import { publishPackages } from './publish-packages';
+import type { PublishOptions } from './types';
+import core from '@actions/core';
 
-export default async function run(cwd: string, context: Context, dryRun = false) {
-    console.log(process.env.PKG_NAME, process.env.PKG_VERSION);
+async function main() {
+    // 1. 读取配置
+    const token = core.getInput('token');
+    core.setSecret(token);
+    const options: PublishOptions = {
+        token,
+        tag: core.getInput('tag'),
+        dryRun: core.getInput('dry-run') === 'true',
+        target: core.getInput('target') as PublishOptions['target'],
+        includePrivate: core.getInput('include-private') === 'true',
+        provenance: core.getInput('provenance') === 'true',
+    };
 
-    // @ref https://github.com/actions/toolkit/blob/457303960f03375db6f033e214b9f90d79c3fe5c/packages/github/src/context.ts
-    const owner = context.payload.repository?.owner.login;
-
-    if (!owner) {
-        throw new Error('No owner found in context');
-    }
-
-    const rootPkgFile = path.join(cwd, '/package.json');
-    const pkg = JSON.parse(fs.readFileSync(rootPkgFile, 'utf-8')) as { workspaces?: string[] };
-    const pkgFiles = glob
-        .sync(
-            (pkg.workspaces || []).map((ws) => path.join(ws, 'package.json')),
-            { cwd, onlyFiles: true },
-        )
-        .map((file) => path.join(cwd, file));
-
-    [rootPkgFile, ...pkgFiles].forEach((pkgFile) => {
-        const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
-        // originName        ->  underlineName
-        // my-pkg            ->  my-pkg
-        // @my-scope/my-pkg  ->  my-scope__my-pkg
-        const underlineName = pkg.name.replace(/@(.*)\/(.*)/, '$1__$2');
-        const ownerName = '@' + owner + '/' + underlineName;
-
-        if (dryRun) {
-            console.log('dryRun', pkgFile);
-            console.log('change pkg.name from %s to %s', pkg.name, ownerName);
-        } else {
-            pkg.name = ownerName;
-            fs.writeFileSync(pkgFile, JSON.stringify(pkg), 'utf-8');
-        }
-    });
-
-    return '';
+    // 2. 重写 package.json + 发布
+    await publishPackages(options);
 }
+
+main()
+    .then(() => {
+        core.info('Publish packages successfully');
+    })
+    .catch((err) => {
+        core.setFailed(err.message);
+    });
