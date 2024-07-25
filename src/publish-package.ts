@@ -2,6 +2,7 @@ import cp from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import type { InternalPublishOptions, PublishTarget } from './types';
+import core from '@actions/core';
 
 const registries: Record<PublishTarget, string> = {
     npm: 'https://registry.npmjs.org',
@@ -16,12 +17,20 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
     const exists = fs.existsSync(npmrcFile);
 
     if (exists) {
+        core.info('found .npmrc');
+        core.info('backup .npmrc' + path.relative(process.cwd(), backupFile));
         fs.copyFileSync(npmrcFile, backupFile);
+    } else {
+        core.info('not found .npmrc');
     }
 
     const registry = registries[options.target];
     const authURL = new URL(registry);
+
+    core.info('append .npmrc authToken');
     fs.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, 'utf-8');
+
+    core.info('append .npmrc registry');
     fs.appendFileSync(npmrcFile, `registry=${registry}`, 'utf-8');
 
     const command = [
@@ -30,6 +39,8 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
         'publish',
         options.target === 'npm' && '--provenance',
         `--tag=${options.tag}`,
+        options.dryRun && '--dry-run',
+        core.isDebug() && '--verbose',
     ]
         .filter(Boolean)
         .join(' ');
