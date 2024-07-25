@@ -1,5 +1,3 @@
-# 如果是开发合并请求到主干，则会根据约定式提交创建一个 releasePR，是一个新版本合并请求。
-
 name: release please
 
 on:
@@ -11,7 +9,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - uses: ./.github/actions/setup-nvm
             - run: npm ci
             - run: npm run build
@@ -47,7 +45,7 @@ jobs:
         needs: release
         if: needs.release.outputs.release_created
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - uses: jacobsvante/tag-major-minor-action@v0
               with:
                   major: ${{ needs.release.outputs.major }}
