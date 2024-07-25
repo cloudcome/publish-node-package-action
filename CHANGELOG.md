@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.1.0...v2.1.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* **publish-package:** ensure .npmrc file resolution in monorepo setup ([1d65f86](https://github.com/FrontEndDev-org/publish-node-package-action/commit/1d65f86c63f65a83016abe251d337338669e8efe))
+
 ## [2.1.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.2...v2.1.0) (2024-07-25)
 
 
