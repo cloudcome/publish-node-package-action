@@ -27486,18 +27486,27 @@ function publishPackage(pkgPath, options) {
   const backupFile = npmrcFile + "-" + Date.now();
   const exists = fs$9.existsSync(npmrcFile);
   if (exists) {
+    core.info("found .npmrc");
+    core.info("backup .npmrc" + require$$0$9.relative(process.cwd(), backupFile));
     fs$9.copyFileSync(npmrcFile, backupFile);
+  } else {
+    core.info("not found .npmrc");
   }
   const registry = registries$1[options.target];
   const authURL = new URL(registry);
+  core.info("append .npmrc authToken");
   fs$9.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, "utf-8");
+  core.info("append .npmrc registry");
   fs$9.appendFileSync(npmrcFile, `registry=${registry}`, "utf-8");
+  core.info("publishing package");
   const command2 = [
     //
     "npm",
     "publish",
     options.target === "npm" && "--provenance",
-    `--tag=${options.tag}`
+    `--tag=${options.tag}`,
+    options.dryRun && "--dry-run",
+    core.isDebug() && "--verbose"
   ].filter(Boolean).join(" ");
   try {
     cp.execSync(command2, {
