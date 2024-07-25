@@ -10,7 +10,8 @@ const registries: Record<PublishTarget, string> = {
 
 export function publishPackage(pkgPath: string, options: InternalPublishOptions) {
     const cwd = path.resolve(pkgPath, '..');
-    const npmrcFile = path.join(cwd, '.npmrc');
+    // monorepo 下的所有 package 都参考根目录的 npmrc
+    const npmrcFile = path.resolve('.npmrc');
     const backupFile = npmrcFile + '-' + Date.now();
     const exists = fs.existsSync(npmrcFile);
 
@@ -35,7 +36,7 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
 
     try {
         cp.execSync(command, {
-            cwd: path.resolve(pkgPath, '..'),
+            cwd,
             stdio: 'inherit',
             env: process.env,
         });
