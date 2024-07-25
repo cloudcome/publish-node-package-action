@@ -28,12 +28,10 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
     const authURL = new URL(registry);
 
     core.info(`append .npmrc authToken(${options.token.length})`);
-    fs.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, 'utf-8');
+    fs.appendFileSync(npmrcFile, `\n//${authURL.host}/:_authToken=${options.token}\n`, 'utf-8');
 
     core.info('append .npmrc registry');
-    fs.appendFileSync(npmrcFile, `registry=${registry}`, 'utf-8');
-
-    core.debug(`npmrc: ${fs.readFileSync(npmrcFile, 'utf-8')}`);
+    fs.appendFileSync(npmrcFile, `registry=${registry}\n`, 'utf-8');
 
     core.info('publishing package');
     const command = [
