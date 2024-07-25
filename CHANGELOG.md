@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.2...v2.1.0) (2024-07-25)
+
+
+### Features
+
+* rework publish flow ([769111e](https://github.com/FrontEndDev-org/publish-node-package-action/commit/769111e47b283a386062f8f4b7fdf17faafbf2f8))
+
 ## [2.0.2](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.1...v2.0.2) (2024-07-25)
 
 
