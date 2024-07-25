@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.1...v2.2.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **publish-package:** ensure proper .npmrc formatting on Windows ([09427e7](https://github.com/FrontEndDev-org/publish-node-package-action/commit/09427e7cf758f256dd42a7d87dd690ad26952021))
+
 ## [2.2.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.0...v2.2.1) (2024-07-25)
 
 
