@@ -69,7 +69,6 @@ jobs:
 | `target` | false     | `npm`     | Packages target, optionally `npm` OR `github`                                                                             |
 | `token`  | true    | None     | Target authorization token |
 | `tag`    | false    | `latest` | The version label to release, the default is latest                                                                    |
-| `provenance`    | false    | `false` | Generate provenance statements. Publish must be run from a supported CI provider to succeed. When run from GitHub Actions, requires `id-token: write` permission.                                                               |
 | `dryRun`    | false    | `false` |  Pretend to publish, but don't actually upload to the registry.                                             |
 | `includePrivate`    | false    | `false` |  publish private packages as well.                                                                           |
 

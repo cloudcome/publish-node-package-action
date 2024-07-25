@@ -63,7 +63,7 @@ export async function publishPackages(options: PublishOptions) {
                 dryRun: options.dryRun,
                 package: pkgFile,
                 tag: options.tag,
-                provenance: options.provenance,
+                provenance: options.target === 'npm',
                 registry,
             });
         } finally {

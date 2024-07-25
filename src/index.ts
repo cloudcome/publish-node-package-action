@@ -12,7 +12,6 @@ async function main() {
         dryRun: core.getInput('dry-run') === 'true',
         target: core.getInput('target') as PublishOptions['target'],
         includePrivate: core.getInput('include-private') === 'true',
-        provenance: core.getInput('provenance') === 'true',
     };
 
     // 2. 重写 package.json + 发布
