@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.14.0...v2.0.0) (2024-07-25)
+
+
+### Features
+
+* **publish-node-package-action:** add conditional provenance generation based on target ([a194767](https://github.com/FrontEndDev-org/publish-node-package-action/commit/a1947678eac4ec6717e6398040b8acc4e1c223f2))
+* **publish-node-package-action:** add provenance support and improve workflow ([66a335a](https://github.com/FrontEndDev-org/publish-node-package-action/commit/66a335a79950ec189deb11c3aeec11229e4e7000))
+* 指定版本 2.0.0 ([0e24263](https://github.com/FrontEndDev-org/publish-node-package-action/commit/0e2426376d85a5c9dddf8e42ff6dc201d29f4c8e))
+
+
+### Miscellaneous Chores
+
+* release 2.0.0 ([1852438](https://github.com/FrontEndDev-org/publish-node-package-action/commit/1852438e37e67e2fdbf027494dca3670412cace6))
+
 ## [1.14.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.13.0...v1.14.0) (2024-07-23)
 
 
