@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.1.1...v2.2.0) (2024-07-25)
+
+
+### Features
+
+* 支持 debug 日志 ([4e441d0](https://github.com/FrontEndDev-org/publish-node-package-action/commit/4e441d015764cf460cae4faaab373f7584df47bf))
+
 ## [2.1.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.1.0...v2.1.1) (2024-07-25)
 
 
