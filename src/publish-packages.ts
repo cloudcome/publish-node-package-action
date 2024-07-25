@@ -4,6 +4,7 @@ import glob from 'fast-glob';
 import fs from 'fs';
 import path from 'path';
 import type { PublishOptions, PublishTarget } from './types';
+import core from '@actions/core';
 
 type PKG = {
     name: string;
@@ -32,19 +33,27 @@ export async function publishPackages(options: PublishOptions) {
         throw new Error('No owner found in context');
     }
 
-    const rootPkgFile = path.join(cwd, '/package.json');
+    const rootPkgFile = path.join(cwd, 'package.json');
     const pkg = JSON.parse(fs.readFileSync(rootPkgFile, 'utf-8')) as PKG;
-    const childPkgFiles = glob
-        .sync(
-            (pkg.workspaces || []).map((ws) => path.join(ws, 'package.json')),
-            { cwd, onlyFiles: true },
-        )
-        .map((file) => path.join(cwd, file));
+    const childPkgPaths = glob.sync(
+        (pkg.workspaces || []).map((ws) => path.join(ws, 'package.json')),
+        { cwd, onlyFiles: true },
+    );
 
-    for (const pkgFile of [rootPkgFile, ...childPkgFiles]) {
+    const pkgPaths = ['package.json', ...childPkgPaths];
+    core.info(`pkgPaths: ${JSON.stringify(pkgPaths)}`);
+
+    for (const pkgPath of pkgPaths) {
+        core.info(`read package ${pkgPath}`);
+
+        const pkgFile = path.join(cwd, pkgPath);
         const origin = fs.readFileSync(pkgFile, 'utf-8');
         const pkg = JSON.parse(origin) as PKG;
-        if (pkg.private && !options.includePrivate) continue;
+
+        if (pkg.private && !options.includePrivate) {
+            core.info(`skip private package ${pkgPath}`);
+            continue;
+        }
 
         if (options.target === 'github') {
             // originName        ->  underlineName
@@ -53,22 +62,24 @@ export async function publishPackages(options: PublishOptions) {
             const underlineName = pkg.name.replace(/@(.*)\/(.*)/, '$1__$2');
             const ownerName = '@' + owner + '/' + underlineName;
 
+            core.info(`rewrite package name: ${pkg.name}->${ownerName}`);
             pkg.name = ownerName;
             fs.writeFileSync(pkgFile, JSON.stringify(pkg), 'utf-8');
         }
 
         try {
+            core.info(`publish package: ${pkgPath} ${pkg.name}@${pkg.version} as ${options.tag} to ${options.target}`);
             await npmPublish({
                 token: options.token,
                 dryRun: options.dryRun,
-                package: pkgFile,
+                package: pkgPath,
                 tag: options.tag,
                 provenance: options.target === 'npm',
                 registry,
             });
         } finally {
             if (options.target === 'github') {
-                fs.writeFileSync(pkgFile, origin, 'utf-8');
+                fs.writeFileSync(pkgPath, origin, 'utf-8');
             }
         }
     }
