@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.0...v2.0.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* 修正 node 依赖 ([1c22816](https://github.com/FrontEndDev-org/publish-node-package-action/commit/1c22816df43590afa5d459206217c8d10e68bc91))
+
 ## [2.0.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v1.14.0...v2.0.0) (2024-07-25)
 
 
