@@ -27482,7 +27482,7 @@ const registries$1 = {
 };
 function publishPackage(pkgPath, options) {
   const cwd = require$$0$9.resolve(pkgPath, "..");
-  const npmrcFile = require$$0$9.join(cwd, ".npmrc");
+  const npmrcFile = require$$0$9.resolve(".npmrc");
   const backupFile = npmrcFile + "-" + Date.now();
   const exists = fs$9.existsSync(npmrcFile);
   if (exists) {
@@ -27501,7 +27501,7 @@ function publishPackage(pkgPath, options) {
   ].filter(Boolean).join(" ");
   try {
     cp.execSync(command2, {
-      cwd: require$$0$9.resolve(pkgPath, ".."),
+      cwd,
       stdio: "inherit",
       env: process.env
     });
