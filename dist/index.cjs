@@ -27487,17 +27487,18 @@ function publishPackage(pkgPath, options) {
   const exists = fs$9.existsSync(npmrcFile);
   if (exists) {
     core.info("found .npmrc");
-    core.info("backup .npmrc" + require$$0$9.relative(process.cwd(), backupFile));
+    core.info("backup .npmrc " + require$$0$9.relative(process.cwd(), backupFile));
     fs$9.copyFileSync(npmrcFile, backupFile);
   } else {
     core.info("not found .npmrc");
   }
   const registry = registries$1[options.target];
   const authURL = new URL(registry);
-  core.info("append .npmrc authToken");
+  core.info(`append .npmrc authToken(${options.token.length})`);
   fs$9.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, "utf-8");
   core.info("append .npmrc registry");
   fs$9.appendFileSync(npmrcFile, `registry=${registry}`, "utf-8");
+  core.debug(`npmrc: ${fs$9.readFileSync(npmrcFile, "utf-8")}`);
   core.info("publishing package");
   const command2 = [
     //
