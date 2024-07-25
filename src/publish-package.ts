@@ -33,6 +33,7 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
     core.info('append .npmrc registry');
     fs.appendFileSync(npmrcFile, `registry=${registry}`, 'utf-8');
 
+    core.info('publishing package');
     const command = [
         //
         'npm',
