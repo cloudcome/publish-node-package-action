@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.1...v2.0.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **publish-packages:** add logging and improve path handling ([4f1d74f](https://github.com/FrontEndDev-org/publish-node-package-action/commit/4f1d74f0d2ccc0799b7424689251368a97f5bc19))
+
 ## [2.0.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.0.0...v2.0.1) (2024-07-25)
 
 
