@@ -31077,53 +31077,6 @@ function assertPatternsInput(input) {
 }
 var out = FastGlob;
 const glob = /* @__PURE__ */ getDefaultExportFromCjs(out);
-const registries = {
-  npm: "https://registry.npmjs.org",
-  github: "https://npm.pkg.github.com"
-};
-async function publishPackages(options2) {
-  const registry = registries[options2.target || "npm"];
-  if (!registry) {
-    throw new Error(`Invalid registry target: ${options2.target}`);
-  }
-  const owner = github.context.payload.repository?.owner.login;
-  const cwd = process.cwd();
-  if (!owner) {
-    throw new Error("No owner found in context");
-  }
-  const rootPkgFile = require$$0$b.join(cwd, "/package.json");
-  const pkg = JSON.parse(require$$0.readFileSync(rootPkgFile, "utf-8"));
-  const childPkgFiles = glob.sync(
-    (pkg.workspaces || []).map((ws) => require$$0$b.join(ws, "package.json")),
-    { cwd, onlyFiles: true }
-  ).map((file2) => require$$0$b.join(cwd, file2));
-  for (const pkgFile of [rootPkgFile, ...childPkgFiles]) {
-    const origin = require$$0.readFileSync(pkgFile, "utf-8");
-    const pkg2 = JSON.parse(origin);
-    if (pkg2.private && !options2.includePrivate) continue;
-    if (options2.target === "github") {
-      const underlineName = pkg2.name.replace(/@(.*)\/(.*)/, "$1__$2");
-      const ownerName = "@" + owner + "/" + underlineName;
-      pkg2.name = ownerName;
-      require$$0.writeFileSync(pkgFile, JSON.stringify(pkg2), "utf-8");
-    }
-    try {
-      await lib.npmPublish({
-        token: options2.token,
-        dryRun: options2.dryRun,
-        package: pkgFile,
-        tag: options2.tag,
-        provenance: options2.target === "npm",
-        registry
-      });
-    } finally {
-      if (options2.target === "github") {
-        require$$0.writeFileSync(pkgFile, origin, "utf-8");
-      }
-    }
-  }
-  return "";
-}
 var core$1 = {};
 var command = {};
 var utils = {};
@@ -32443,6 +32396,62 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
 }
 var coreExports = requireCore();
 const core = /* @__PURE__ */ getDefaultExportFromCjs(coreExports);
+const registries = {
+  npm: "https://registry.npmjs.org",
+  github: "https://npm.pkg.github.com"
+};
+async function publishPackages(options2) {
+  const registry = registries[options2.target || "npm"];
+  if (!registry) {
+    throw new Error(`Invalid registry target: ${options2.target}`);
+  }
+  const owner = github.context.payload.repository?.owner.login;
+  const cwd = process.cwd();
+  if (!owner) {
+    throw new Error("No owner found in context");
+  }
+  const rootPkgFile = require$$0$b.join(cwd, "package.json");
+  const pkg = JSON.parse(require$$0.readFileSync(rootPkgFile, "utf-8"));
+  const childPkgPaths = glob.sync(
+    (pkg.workspaces || []).map((ws) => require$$0$b.join(ws, "package.json")),
+    { cwd, onlyFiles: true }
+  );
+  const pkgPaths = ["package.json", ...childPkgPaths];
+  core.info(`pkgPaths: ${JSON.stringify(pkgPaths)}`);
+  for (const pkgPath of pkgPaths) {
+    core.info(`read package ${pkgPath}`);
+    const pkgFile = require$$0$b.join(cwd, pkgPath);
+    const origin = require$$0.readFileSync(pkgFile, "utf-8");
+    const pkg2 = JSON.parse(origin);
+    if (pkg2.private && !options2.includePrivate) {
+      core.info(`skip private package ${pkgPath}`);
+      continue;
+    }
+    if (options2.target === "github") {
+      const underlineName = pkg2.name.replace(/@(.*)\/(.*)/, "$1__$2");
+      const ownerName = "@" + owner + "/" + underlineName;
+      core.info(`rewrite package name: ${pkg2.name}->${ownerName}`);
+      pkg2.name = ownerName;
+      require$$0.writeFileSync(pkgFile, JSON.stringify(pkg2), "utf-8");
+    }
+    try {
+      core.info(`publish package: ${pkgPath} ${pkg2.name}@${pkg2.version} as ${options2.tag} to ${options2.target}`);
+      await lib.npmPublish({
+        token: options2.token,
+        dryRun: options2.dryRun,
+        package: pkgPath,
+        tag: options2.tag,
+        provenance: options2.target === "npm",
+        registry
+      });
+    } finally {
+      if (options2.target === "github") {
+        require$$0.writeFileSync(pkgPath, origin, "utf-8");
+      }
+    }
+  }
+  return "";
+}
 async function main() {
   const token = core.getInput("token");
   core.setSecret(token);
