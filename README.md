@@ -22,10 +22,10 @@ jobs:
       contents: read
       id-token: write # Give permission to mint an ID-token
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run build
-      - uses: FrontEndDev-org/publish-node-package-action@v1
+      - uses: FrontEndDev-org/publish-node-package-action@v2
         with:
           target: npm
           token: ${{ secrets.NPM_TOKEN }}
@@ -53,10 +53,10 @@ jobs:
     permissions:
       packages: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run build
-      - uses: FrontEndDev-org/publish-node-package-action@v1
+      - uses: FrontEndDev-org/publish-node-package-action@v2
         with:
           target: github
           token: ${{ github.token }}
