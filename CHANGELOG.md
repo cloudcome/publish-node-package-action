@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.0...v2.2.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* 增加调试日志 ([abbb610](https://github.com/FrontEndDev-org/publish-node-package-action/commit/abbb610875c9aff38303530b2180093c12edb185))
+
 ## [2.2.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.1.1...v2.2.0) (2024-07-25)
 
 
