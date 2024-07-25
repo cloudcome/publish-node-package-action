@@ -18,7 +18,7 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
 
     if (exists) {
         core.info('found .npmrc');
-        core.info('backup .npmrc' + path.relative(process.cwd(), backupFile));
+        core.info('backup .npmrc ' + path.relative(process.cwd(), backupFile));
         fs.copyFileSync(npmrcFile, backupFile);
     } else {
         core.info('not found .npmrc');
@@ -27,11 +27,13 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
     const registry = registries[options.target];
     const authURL = new URL(registry);
 
-    core.info('append .npmrc authToken');
+    core.info(`append .npmrc authToken(${options.token.length})`);
     fs.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, 'utf-8');
 
     core.info('append .npmrc registry');
     fs.appendFileSync(npmrcFile, `registry=${registry}`, 'utf-8');
+
+    core.debug(`npmrc: ${fs.readFileSync(npmrcFile, 'utf-8')}`);
 
     core.info('publishing package');
     const command = [
