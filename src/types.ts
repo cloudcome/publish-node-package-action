@@ -7,3 +7,5 @@ export type PublishOptions = {
     dryRun?: boolean;
     includePrivate?: boolean;
 };
+
+export type InternalPublishOptions = Required<PublishOptions>;

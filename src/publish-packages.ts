@@ -1,10 +1,10 @@
+import core from '@actions/core';
 import github from '@actions/github';
-import { npmPublish } from '@jsdevtools/npm-publish';
 import glob from 'fast-glob';
 import fs from 'fs';
 import path from 'path';
-import type { PublishOptions, PublishTarget } from './types';
-import core from '@actions/core';
+import type { InternalPublishOptions, PublishTarget } from './types';
+import { publishPackage } from './publish-package';
 
 type PKG = {
     name: string;
@@ -18,8 +18,8 @@ const registries: Record<PublishTarget, string> = {
     github: 'https://npm.pkg.github.com',
 };
 
-export async function publishPackages(options: PublishOptions) {
-    const registry = registries[options.target || 'npm'];
+export async function publishPackages(options: InternalPublishOptions) {
+    const registry = registries[options.target];
 
     if (!registry) {
         throw new Error(`Invalid registry target: ${options.target}`);
@@ -69,14 +69,7 @@ export async function publishPackages(options: PublishOptions) {
 
         try {
             core.info(`publish package: ${pkgPath} ${pkg.name}@${pkg.version} as ${options.tag} to ${options.target}`);
-            await npmPublish({
-                token: options.token,
-                dryRun: options.dryRun,
-                package: pkgPath,
-                tag: options.tag,
-                provenance: options.target === 'npm',
-                registry,
-            });
+            publishPackage(pkgPath, options);
         } finally {
             if (options.target === 'github') {
                 fs.writeFileSync(pkgPath, origin, 'utf-8');
