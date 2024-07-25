@@ -16,7 +16,7 @@
         "target": "ES2023",
 
         // node18 https://node.green/#ES2023
-        "lib": ["ES2023", "DOM"],
+        "lib": ["ES2023"],
         "plugins": [],
         "types": ["vitest/globals"]
     },

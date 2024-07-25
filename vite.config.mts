@@ -18,13 +18,14 @@ export default defineConfig({
         sourcemap: false,
         copyPublicDir: false,
         reportCompressedSize: false,
+        target: 'ES2023',
         lib: {
             entry: {
                 index: 'src/index.ts',
             },
         },
         rollupOptions: {
-            external: [...builtinModules, 'node:*'],
+            external: [...builtinModules, ...builtinModules.map((m) => `node:${m}`)],
             output: [
                 {
                     format: 'cjs',
