@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.4.0...v2.5.0) (2025-01-16)
+
+
+### Features
+
+* 优化调试日志和执行命令的输出 ([2ec0100](https://github.com/FrontEndDev-org/publish-node-package-action/commit/2ec0100e3d0dded8be1f317aab99aa5d42e75243))
+
 ## [2.4.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.3.0...v2.4.0) (2025-01-16)
 
 
