@@ -71,6 +71,7 @@ jobs:
 | `tag`    | false    | `latest` | The version label to release, the default is latest                                                                    |
 | `dryRun`    | false    | `false` |  Pretend to publish, but don't actually upload to the registry.                                             |
 | `includePrivate`    | false    | `false` |  publish private packages as well.                                                                           |
+| `disableProvenance`    | false    | `false` |  Disable provenance for npm publish.                                                                   |
 
 # Outputs
 
