@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.3.0...v2.4.0) (2025-01-16)
+
+
+### Features
+
+* **action:** 添加禁用 npm 发布的出处证明功能 ([8f47f33](https://github.com/FrontEndDev-org/publish-node-package-action/commit/8f47f33f5482f62049c3f825c214ec803ea2ff06))
+
 ## [2.3.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.2...v2.3.0) (2025-01-16)
 
 
