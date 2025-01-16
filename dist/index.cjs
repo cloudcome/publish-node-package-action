@@ -27514,7 +27514,7 @@ function publishPackage(pkgPath, options) {
     //
     "npm",
     "publish",
-    options.target === "npm" && "--provenance",
+    options.target === "npm" && !options.disableProvenance && "--provenance",
     `--tag=${options.tag}`,
     options.dryRun && "--dry-run",
     core.isDebug() && "--verbose"
@@ -27586,16 +27586,18 @@ async function main() {
   const inputs = {
     token,
     tag: core.getInput("tag"),
-    dryRun: core.getInput("dry-run") === "true",
+    dryRun: core.getInput("dryRun") === "true",
     target: core.getInput("target"),
-    includePrivate: core.getInput("include-private") === "true"
+    includePrivate: core.getInput("includePrivate") === "true",
+    disableProvenance: core.getInput("disableProvenance") === "true"
   };
   const defaults = {
     dryRun: false,
     target: "npm",
     includePrivate: false,
     tag: "latest",
-    token: ""
+    token: "",
+    disableProvenance: false
   };
   const options = {};
   for (const [key, defaultVal] of Object.entries(defaults)) {
