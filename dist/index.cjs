@@ -27483,7 +27483,7 @@ const registries$1 = {
 function publishPackage(pkgPath, options) {
   const cwd = require$$0$9.resolve(pkgPath, "..");
   const exec = (command22) => {
-    core.info(command22);
+    core.info(`> ${command22}`);
     cp.execSync(command22, {
       cwd,
       stdio: "inherit",
@@ -27553,8 +27553,10 @@ async function publishPackages(options) {
   );
   const pkgPaths = ["package.json", ...childPkgPaths];
   core.info(`pkgPaths: ${JSON.stringify(pkgPaths)}`);
+  const length = pkgPaths.length;
+  let order = 1;
   for (const pkgPath of pkgPaths) {
-    core.info(`read package ${pkgPath}`);
+    core.info(`[${order++}/${length}] read package ${pkgPath}`);
     const pkgFile = require$$0$9.join(cwd, pkgPath);
     const origin = fs$9.readFileSync(pkgFile, "utf-8");
     const pkg2 = JSON.parse(origin);
@@ -27603,6 +27605,9 @@ async function main() {
   for (const [key, defaultVal] of Object.entries(defaults)) {
     const input = inputs[key];
     options[key] = input === void 0 ? defaultVal : input;
+  }
+  if (core.isDebug()) {
+    core.debug(`Options: ${JSON.stringify(options, null, 2)}`);
   }
   await publishPackages(options);
 }
