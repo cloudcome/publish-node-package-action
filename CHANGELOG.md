@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.2...v2.3.0) (2025-01-16)
+
+
+### Features
+
+* 增加发布包时的调试信息 ([dd0570d](https://github.com/FrontEndDev-org/publish-node-package-action/commit/dd0570dc042b889286bfabcead8f1dc785fdb91d))
+
 ## [2.2.2](https://github.com/FrontEndDev-org/publish-node-package-action/compare/v2.2.1...v2.2.2) (2024-07-25)
 
 
