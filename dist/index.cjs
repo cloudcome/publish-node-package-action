@@ -27495,10 +27495,12 @@ function publishPackage(pkgPath, options) {
   const registry = registries$1[options.target];
   const authURL = new URL(registry);
   core.info(`append .npmrc authToken(${options.token.length})`);
-  fs$9.appendFileSync(npmrcFile, `//${authURL.host}/:_authToken=${options.token}`, "utf-8");
+  fs$9.appendFileSync(npmrcFile, `
+//${authURL.host}/:_authToken=${options.token}
+`, "utf-8");
   core.info("append .npmrc registry");
-  fs$9.appendFileSync(npmrcFile, `registry=${registry}`, "utf-8");
-  core.debug(`npmrc: ${fs$9.readFileSync(npmrcFile, "utf-8")}`);
+  fs$9.appendFileSync(npmrcFile, `registry=${registry}
+`, "utf-8");
   core.info("publishing package");
   const command2 = [
     //
