@@ -12,7 +12,7 @@ const registries: Record<PublishTarget, string> = {
 export function publishPackage(pkgPath: string, options: InternalPublishOptions) {
     const cwd = path.resolve(pkgPath, '..');
     const exec = (command: string) => {
-        core.info(command);
+        core.info(`> ${command}`);
         cp.execSync(command, {
             cwd,
             stdio: 'inherit',

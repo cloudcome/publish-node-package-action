@@ -42,9 +42,11 @@ export async function publishPackages(options: InternalPublishOptions) {
 
     const pkgPaths = ['package.json', ...childPkgPaths];
     core.info(`pkgPaths: ${JSON.stringify(pkgPaths)}`);
+    const length = pkgPaths.length;
 
+    let order = 1;
     for (const pkgPath of pkgPaths) {
-        core.info(`read package ${pkgPath}`);
+        core.info(`[${order++}/${length}] read package ${pkgPath}`);
 
         const pkgFile = path.join(cwd, pkgPath);
         const origin = fs.readFileSync(pkgFile, 'utf-8');

@@ -32,6 +32,10 @@ async function main() {
         options[key as keyof PublishOptions] = input === undefined ? defaultVal : input;
     }
 
+    if (core.isDebug()) {
+        core.debug(`Options: ${JSON.stringify(options, null, 2)}`);
+    }
+
     // 2. 重写 package.json + 发布
     await publishPackages(options);
 }
