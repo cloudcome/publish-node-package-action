@@ -19,8 +19,8 @@ jobs:
                   committer: github-actions[bot] <github-actions-bot@users.noreply.github.com>
                   author: github-actions[bot] <github-actions-bot@users.noreply.github.com>
                   commit-message: 'chore: build dist'
-                  title: 机器人自动创建的拉取请求，将会自动合并，请勿手动处理！
-                  body: 机器人自动创建的拉取请求，将会自动合并，请勿手动处理！
+                  title: 构建产物的合并请求，请勿手动处理 | Build Artifact Merge Request, Do Not Handle Manually
+                  body: 构建产物的合并请求，请勿手动处理 | Build Artifact Merge Request, Do Not Handle Manually
             - run: gh pr merge ${{ steps.pr.outputs.pull-request-number }} --merge --auto --delete-branch
               if: ${{ steps.pr.outputs.pull-request-number }}
               env:
