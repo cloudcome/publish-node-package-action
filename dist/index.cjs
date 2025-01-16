@@ -27482,6 +27482,14 @@ const registries$1 = {
 };
 function publishPackage(pkgPath, options) {
   const cwd = require$$0$9.resolve(pkgPath, "..");
+  const exec = (command22) => {
+    core.info(command22);
+    cp.execSync(command22, {
+      cwd,
+      stdio: "inherit",
+      env: process.env
+    });
+  };
   const npmrcFile = require$$0$9.resolve(".npmrc");
   const backupFile = npmrcFile + "-" + Date.now();
   const exists = fs$9.existsSync(npmrcFile);
@@ -27512,18 +27520,9 @@ function publishPackage(pkgPath, options) {
     core.isDebug() && "--verbose"
   ].filter(Boolean).join(" ");
   try {
-    core.info("npm --version");
-    cp.execSync("npm --version", {
-      cwd,
-      stdio: "inherit",
-      env: process.env
-    });
-    core.info(command2);
-    cp.execSync(command2, {
-      cwd,
-      stdio: "inherit",
-      env: process.env
-    });
+    exec("node --version");
+    exec("npm --version");
+    exec(command2);
   } finally {
     if (exists) {
       fs$9.renameSync(backupFile, npmrcFile);
