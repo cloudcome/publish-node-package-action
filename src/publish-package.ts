@@ -11,6 +11,14 @@ const registries: Record<PublishTarget, string> = {
 
 export function publishPackage(pkgPath: string, options: InternalPublishOptions) {
     const cwd = path.resolve(pkgPath, '..');
+    const exec = (command: string) => {
+        core.info(command);
+        cp.execSync(command, {
+            cwd,
+            stdio: 'inherit',
+            env: process.env,
+        });
+    };
     // monorepo 下的所有 package 都参考根目录的 npmrc
     const npmrcFile = path.resolve('.npmrc');
     const backupFile = npmrcFile + '-' + Date.now();
@@ -47,18 +55,9 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
         .join(' ');
 
     try {
-        core.info('npm --version');
-        cp.execSync('npm --version', {
-            cwd,
-            stdio: 'inherit',
-            env: process.env,
-        });
-        core.info(command);
-        cp.execSync(command, {
-            cwd,
-            stdio: 'inherit',
-            env: process.env,
-        });
+        exec('node --version');
+        exec('npm --version');
+        exec(command);
     } finally {
         if (exists) {
             fs.renameSync(backupFile, npmrcFile);
