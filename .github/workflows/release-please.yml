@@ -8,23 +8,23 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
         steps:
             - uses: actions/checkout@v4
             - uses: ./.github/actions/setup-nvm
             - run: npm ci
             - run: npm run build
-            - uses: peter-evans/create-pull-request@v4
+            - uses: peter-evans/create-pull-request@v7
               id: pr
               with:
-                  committer: github-actions[bot] <github-actions-bot@users.noreply.github.com>
-                  author: github-actions[bot] <github-actions-bot@users.noreply.github.com>
-                  commit-message: 'chore: build dist'
-                  title: 构建产物的合并请求，请勿手动处理 | Build Artifact Merge Request, Do Not Handle Manually
-                  body: 构建产物的合并请求，请勿手动处理 | Build Artifact Merge Request, Do Not Handle Manually
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  commit-message: 'build: build dist'
             - run: gh pr merge ${{ steps.pr.outputs.pull-request-number }} --merge --auto --delete-branch
               if: ${{ steps.pr.outputs.pull-request-number }}
               env:
-                  GH_TOKEN: ${{ github.token }}
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     release:
         runs-on: ubuntu-latest
         permissions:
