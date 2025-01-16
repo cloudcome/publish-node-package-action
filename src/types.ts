@@ -6,6 +6,7 @@ export type PublishOptions = {
     tag?: string;
     dryRun?: boolean;
     includePrivate?: boolean;
+    disableProvenance?: boolean;
 };
 
 export type InternalPublishOptions = Required<PublishOptions>;

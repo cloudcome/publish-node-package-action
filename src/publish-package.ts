@@ -46,7 +46,7 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
         //
         'npm',
         'publish',
-        options.target === 'npm' && '--provenance',
+        options.target === 'npm' && !options.disableProvenance && '--provenance',
         `--tag=${options.tag}`,
         options.dryRun && '--dry-run',
         core.isDebug() && '--verbose',

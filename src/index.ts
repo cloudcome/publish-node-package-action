@@ -9,9 +9,10 @@ async function main() {
     const inputs: PublishOptions = {
         token,
         tag: core.getInput('tag'),
-        dryRun: core.getInput('dry-run') === 'true',
+        dryRun: core.getInput('dryRun') === 'true',
         target: core.getInput('target') as PublishOptions['target'],
-        includePrivate: core.getInput('include-private') === 'true',
+        includePrivate: core.getInput('includePrivate') === 'true',
+        disableProvenance: core.getInput('disableProvenance') === 'true',
     };
     const defaults: InternalPublishOptions = {
         dryRun: false,
@@ -19,6 +20,7 @@ async function main() {
         includePrivate: false,
         tag: 'latest',
         token: '',
+        disableProvenance: false,
     };
     const options = {} as InternalPublishOptions;
 

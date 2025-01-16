@@ -20,6 +20,9 @@ inputs:
   includePrivate:
     description: publish private packages as well.
     required: false
+  disableProvenance:
+    description: Disable provenance for npm publish.
+    required: false
 
 # https://actions-cool.github.io/github-action-branding/
 branding:
