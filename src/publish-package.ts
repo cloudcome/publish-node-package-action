@@ -47,6 +47,13 @@ export function publishPackage(pkgPath: string, options: InternalPublishOptions)
         .join(' ');
 
     try {
+        core.info('npm --version');
+        cp.execSync('npm --version', {
+            cwd,
+            stdio: 'inherit',
+            env: process.env,
+        });
+        core.info(command);
         cp.execSync(command, {
             cwd,
             stdio: 'inherit',
