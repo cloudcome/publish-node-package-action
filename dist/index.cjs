@@ -27512,6 +27512,13 @@ function publishPackage(pkgPath, options) {
     core.isDebug() && "--verbose"
   ].filter(Boolean).join(" ");
   try {
+    core.info("npm --version");
+    cp.execSync("npm --version", {
+      cwd,
+      stdio: "inherit",
+      env: process.env
+    });
+    core.info(command2);
     cp.execSync(command2, {
       cwd,
       stdio: "inherit",
